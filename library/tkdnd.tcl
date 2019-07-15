@@ -157,7 +157,9 @@ namespace eval ::tkdnd {
         error "unknown Tk windowing system"
       }
     }
-    load $dir/$PKG_LIB_FILE $PACKAGE_NAME
+    if {[string match ".so" $PKG_LIB_FILE] || [string match ".dll" $PKG_LIB_FILE]} {
+      load $dir/$PKG_LIB_FILE $PACKAGE_NAME
+    }
     source $dir/tkdnd_compat.tcl
     ${_platform_namespace}::initialise
   };# initialise
